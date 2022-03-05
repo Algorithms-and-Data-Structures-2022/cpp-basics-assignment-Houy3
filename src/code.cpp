@@ -40,29 +40,38 @@ namespace assignment {
   // Task 4
   void swap_args(int *left, int *right) {
 
-    int* middle = left;
-    left = right;
-    right = middle;
+    if (left != nullptr && right != nullptr) {
+      int leftCopy = *left;
+      *left = *right;
+      *right = leftCopy;
+    }
   }
 
   // Task 5
   int arr_sum(int *arr, int length) {
 
+    if (arr == nullptr || length <= 0) {
+      return 0;
+    }
+
     int sum = 0;
     for (int i = 0; i < length; i++) {
       sum += arr[i];
     }
-
     return sum;
   }
 
   // Task 6
   int* find_max_elem(int *arr, int length) {
 
-    int* max;
+    if (arr == nullptr || length <= 0) {
+      return nullptr;
+    }
+
+    int* max = arr;
     for (int i = 0; i < length; i++) {
       if (*max < arr[i]) {
-        *max = arr[i];
+        max = &arr[i];
       }
     }
 
@@ -98,14 +107,14 @@ namespace assignment {
   void print_kth_elements(int *arr, int length, int k, std::ostream &os) {
 
     if (arr == nullptr) {
-      std::printf("Invalid argument: arr\n");
+      os << "Invalid argument: arr\n";
     } else if (length <= 0) {
-      std::printf("Invalid argument: length\n");
+      os << "Invalid argument: length\n";
     } else if (k <= 0) {
-      std::printf("Invalid argument: k\n");
+      os << "Invalid argument: k\n";
     } else {
       for (int i = 0; i < length; i = i + k) {
-        std::printf("%d\t", arr[i]);
+        os << arr[i] << "\t";
       }
     }
 
